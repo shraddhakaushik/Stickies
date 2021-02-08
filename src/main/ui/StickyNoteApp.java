@@ -7,16 +7,22 @@ public class StickyNoteApp {
     private StickyNote sticky;
     private Scanner typed;
 
+    public StickyNoteApp() {
+        sticky = new StickyNote("untitled", "");
+        typed = new Scanner(System.in);
+    }
+
     //MODIFIES: this
     //EFFECTS: ask user if they want to change name. If user responds "yes", allow user to input new name and assign
     //         the new name to the note. Else, name remains "untitled"
     public void setName() {
-        System.out.println("Would you like to name this note? Type yes to change the name ...");
-        if (typed.nextLine() == "yes") {
+        System.out.println("Would you like to name this note? Type yes to change the name");
+        if (typed.nextLine().equals("yes")) {
             System.out.println("Type name below");
             sticky.assignName(typed.nextLine());
+            System.out.println("New note: " + sticky.getName());
         } else {
-            System.out.println("No name assigned");
+            System.out.println("New note: untitled");
         }
     }
 
