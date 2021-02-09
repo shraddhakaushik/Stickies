@@ -4,11 +4,10 @@ package model;
 public class StickyNote {
     private String name;
     private String notes;
-    private static final String DEFAULT_NAME = "untitled";
 
     public StickyNote(String name, String notes) {
         this.name = name;
-        name = DEFAULT_NAME;
+        name = "untitled";
         this.notes = notes;
     }
 
