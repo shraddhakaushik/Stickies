@@ -53,7 +53,7 @@ public class StickyNoteApp {
 
         for (StickyNote note: savedNotes) {
             if (name == note.getName()) {
-                System.out.println("Note found! type access to access note");
+                System.out.println("Note found! type ACCESS to access note");
                 getNote(name);
             } else {
                 System.out.println("This note could not be found");
@@ -62,11 +62,12 @@ public class StickyNoteApp {
     }
 
     public void getNote(String name) {
-        if (typed.next().equals("access")) {
+        if (typed.next().equals("ACCESS")) {
             System.out.println("Note name: " + sticky.getName());
             System.out.println("Notes: " + sticky.getName());
+        } else {
+            System.out.println("Not accessing note");
         }
-        System.out.println("Not accessing note");
 
     }
 
