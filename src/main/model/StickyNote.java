@@ -16,7 +16,7 @@ public class StickyNote {
     }
 
     public void assignNotes(String typed) {
-        notes = typed;
+        notes = notes + typed;
     }
 
     public String getName() {

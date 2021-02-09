@@ -18,12 +18,13 @@ public class StickyNoteApp {
     }
 
     private void processTyped() {
+        boolean keepGoing = true;
         String op = "";
         System.out.println("Welcome to your sticky note!");
         nameNote();
         System.out.println("Type notes below!");
 
-        while (true) {
+        while (keepGoing) {
             op = typed.next();
             if (op.equals("SAVE")) {
                 saveNote(sticky);
@@ -31,39 +32,42 @@ public class StickyNoteApp {
                 clearNote();
             } else if (op.equals("RENAME")) {
                 nameNote();
+            } else if (op.equals("FIND")) {
+                findSavedNote(sticky.getName());
             } else if (op.equals("QUIT")) {
-                break;
+                keepGoing = false;
             } else {
                 type();
             }
         }
     }
 
-    //else if (op.equals("FIND")) {
-    //                findSavedNote(sticky.getName());
+
     public void saveNote(StickyNote sticky) {
         savedNotes.add(sticky);
         System.out.println("Note saved!");
     }
 
-    public String findSavedNote(String name) {
-        String result;
-        result = "This note could not be found";
-        for (StickyNote note : savedNotes) {
+    public void findSavedNote(String name) {
+        System.out.println("searching...");
+
+        for (StickyNote note: savedNotes) {
             if (name == note.getName()) {
-                result = "Note found! type access to access note";
+                System.out.println("Note found! type access to access note");
                 getNote(name);
+            } else {
+                System.out.println("This note could not be found");
             }
         }
-        return result;
     }
 
-    public StickyNote getNote(String name) {
+    public void getNote(String name) {
         if (typed.next().equals("access")) {
-            return sticky;
+            System.out.println("Note name: " + sticky.getName());
+            System.out.println("Notes: " + sticky.getName());
         }
         System.out.println("Not accessing note");
-        return null;
+
     }
 
 
@@ -78,15 +82,15 @@ public class StickyNoteApp {
             sticky.assignName(typed.next());
             System.out.println("New note: " + sticky.getName());
         } else {
-            System.out.println("New note: untitled");
+            System.out.println("New note: " + sticky.getName());
         }
     }
 
     //MODIFIES: this
     //EFFECTS: prints words typed and adds words to notes
-    public String type() {
-        sticky.assignNotes(typed.next());
-        return typed.next();
+    public void type() {
+        String boo = typed.nextLine();
+        sticky.assignNotes(boo);
     }
 
     //MODIFIES: this
