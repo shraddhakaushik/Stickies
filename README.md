@@ -16,14 +16,26 @@ as well as to other students and professionals working centrally with their comp
 
 
 **USER STORIES:**
-- As a user, I want to be able to create a new note
-- As a user, I want to be able to save a note to a list of saved notes
-- As a user, I want to be able to name my note
-- As a user, I want to be able to type on my note
-- As a user, I want to be able to clear my notes from a note
-- As a user, I want to be able to find and access my note from my saved notes
-- As a user, I want to be able to customise the colour of my note
+
+*IMPLEMENTED FOR PHASE ONE*:
+- As a user, I want to be able to create a new sticky note at any point
+- As a user, I want to be able to add any number of notes to a sticky note
+- As a user, I want to be able to save any number of sticky notes to a list of saved notes
+- As a user, I want to be able to name my sticky note
+- As a user, I want to be able to type on my sticky note
+- As a user, I want to be able to clear my notes from a sticky note
+- As a user, I want to be able to find, access, and view any saved sticky note from my list of saved notes
+- As a user, I want to be able to quit my note at any point
+
+*GOALS*:
+- As a user, I want to be able to save my notes to a file system to exist even after the program has terminated
+- As a user, I want to be able to access and continue to take notes on a saved note
+- As a user, I want my sticky note to actually resemble a sticky note
+- As a user, I want to be able to create my own typing shortcuts
+- As a user, I want my sticky note to be able to perform simple arithmetic calculations
+- As a user, I want my sticky note to be able to keep track of the time at which I have created the note
+- As a user, I want to be able to customise the colour of my sticky note
 - As a user, I want to be able to change my typing font
-- As a user, I want to be able to input images onto my note
+- As a user, I want to be able to input images onto my sticky note
 
 
