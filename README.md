@@ -16,12 +16,14 @@ as well as to other students and professionals working centrally with their comp
 
 
 **USER STORIES:**
-- As a user, I want to be able to create a new note and add it to a list of notes
+- As a user, I want to be able to create a new note
+- As a user, I want to be able to save a note to a list of saved notes
 - As a user, I want to be able to name my note
 - As a user, I want to be able to type on my note
 - As a user, I want to be able to clear my notes from a note
+- As a user, I want to be able to find and access my note from my saved notes
 - As a user, I want to be able to customise the colour of my note
 - As a user, I want to be able to change my typing font
 - As a user, I want to be able to input images onto my note
-- As a user, I want to be able to save a note to my saved notes
+
 
