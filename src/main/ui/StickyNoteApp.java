@@ -5,11 +5,13 @@ import model.StickyNote;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Sticky notes application
 public class StickyNoteApp {
     private StickyNote sticky;
     private Scanner typed;
     private ArrayList<StickyNote> savedNotes;
 
+    //EFFECTS: constructor for StickyNoteApp
     public StickyNoteApp() {
         sticky = new StickyNote("untitled", "");
         typed = new Scanner(System.in);
@@ -17,15 +19,18 @@ public class StickyNoteApp {
         processTyped();
     }
 
+    //EFFECTS: Interacts with user, keeps track of what user is typing, and responds to given commands appropriately
     private void processTyped() {
         boolean keepGoing = true;
         String op = "";
         System.out.println("Welcome to your sticky note!");
         nameNote();
         System.out.println("Type notes below!");
+        System.out.println("Here are some recognized commands you could use: SAVE, CLEAR, RENAME, FIND, QUIT");
+
 
         while (keepGoing) {
-            op = typed.next();
+            op = typed.nextLine();
             if (op.equals("SAVE")) {
                 saveNote(sticky);
             } else if (op.equals("CLEAR")) {
@@ -37,34 +42,40 @@ public class StickyNoteApp {
             } else if (op.equals("QUIT")) {
                 keepGoing = false;
             } else {
-                type();
+                sticky.assignNotes(op);
             }
         }
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: save note to savedNotes
     public void saveNote(StickyNote sticky) {
         savedNotes.add(sticky);
         System.out.println("Note saved!");
     }
 
+    //REQUIRES: note has been saved at least once before. All changes must be re-saved.
+    //EFFECTS: searches for note in list of saved notes and if found, allows user to access note
     public void findSavedNote(String name) {
         System.out.println("searching...");
 
         for (StickyNote note: savedNotes) {
-            if (name == note.getName()) {
+            if (note.isName(name)) {
                 System.out.println("Note found! type ACCESS to access note");
                 getNote(name);
+                break;
+
             } else {
                 System.out.println("This note could not be found");
             }
         }
     }
 
+    //EFFECTS: If "ACCESS" is typed, accesses note and returns the note's details including name and notes
     public void getNote(String name) {
-        if (typed.next().equals("ACCESS")) {
+        if (typed.nextLine().equals("ACCESS")) {
             System.out.println("Note name: " + sticky.getName());
-            System.out.println("Notes: " + sticky.getName());
+            System.out.println("Notes: " + sticky.getNotes());
         } else {
             System.out.println("Not accessing note");
         }
@@ -78,31 +89,25 @@ public class StickyNoteApp {
     public void nameNote() {
         System.out.println("Current name: " + sticky.getName());
         System.out.println("Would you like to change the name this note? Type yes to name");
-        if (typed.next().equals("yes")) {
+        if (typed.nextLine().equals("yes")) {
             System.out.println("Type name below");
-            sticky.assignName(typed.next());
+            sticky.assignName(typed.nextLine());
             System.out.println("New note: " + sticky.getName());
         } else {
             System.out.println("New note: " + sticky.getName());
         }
     }
 
-    //MODIFIES: this
-    //EFFECTS: prints words typed and adds words to notes
-    public void type() {
-        String boo = typed.nextLine();
-        sticky.assignNotes(boo);
-    }
 
     //MODIFIES: this
     //EFFECTS: if user types "clear all", resets notes to have no words and prints empty
-    public String clearNote() {
+    public void clearNote() {
         System.out.println("Type yes to confirm clearing all notes. Otherwise proceed to continue notes");
-        if (typed.next().equals("yes")) {
-            sticky.assignNotes("");
+        if (typed.nextLine().equals("yes")) {
+            sticky.clearNote();
             System.out.println("notes cleared");
+        } else {
+            System.out.println("not clearing notes");
         }
-        return "";
     }
-
 }

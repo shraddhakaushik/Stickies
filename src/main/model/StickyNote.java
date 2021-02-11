@@ -1,32 +1,49 @@
 package model;
 
-
+// Represents a sticky note having a name and notes
 public class StickyNote {
-    private String name;
-    private String notes;
+    private String name; // tracks name of sticky note through name changes
+    private String notes; // tracks notes attributed to sticky note
 
+    //EFFECTS: constructor for sticky note
     public StickyNote(String name, String notes) {
-        name = "untitled";
-        notes = "";
         this.name = name;
         this.notes = notes;
     }
 
+    //MODIFIES: this
+    //EFFECTS: changes name to given rename
     public void assignName(String rename) {
-        if (name != rename) {
-            name = rename;
-        }
+        name = rename;
     }
 
+    //MODIFIES: this
+    //EFFECTS: attaches typed to notes
     public void assignNotes(String typed) {
-        notes = notes + typed;
+        notes = notes + "\n" + typed;
     }
 
+    //EFFECTS: returns name
     public String getName() {
         return name;
     }
 
+    //EFFECTS: returns notes
     public String getNotes() {
         return notes;
+    }
+
+    //EFFECTS: returns true if given string is equal to name, else returns false
+    public boolean isName(String name) {
+        if (this.name.equals(name)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //EFFECTS: sets notes to "" when called upon
+    public void clearNote() {
+        notes = "";
     }
 }

@@ -15,24 +15,47 @@ class StickyNoteTest {
 
     @Test
     public void testAssignNameUnchanged() {
-        assertEquals(sticky.getName(), "untitled");
+        assertEquals("untitled", sticky.getName());
     }
 
     @Test
     public void testAssignNameChanged() {
         sticky.assignName("new name");
-        assertEquals(sticky.getName(), "new name");
+        assertEquals("new name", sticky.getName());
     }
 
     @Test
     public void testAssignNotesNoNotes(){
-        assertEquals(sticky.getNotes(), "");
+        assertEquals("", sticky.getNotes());
     }
 
     @Test
     public void testAssignNotesNewNotes() {
         sticky.assignNotes("reminders");
-        assertEquals(sticky.getNotes(), "reminders");
+        assertEquals("\nreminders", sticky.getNotes());
+    }
+
+    @Test
+    public void testIsNameNotName() {
+        assertFalse(sticky.isName("bloop"));
+    }
+
+    @Test
+    public void testIsNameName() {
+        assertTrue(sticky.isName("untitled"));
+    }
+
+    @Test
+    public void testClearNoteAlreadyClear() {
+        sticky.clearNote();
+        assertEquals("", sticky.getNotes());
+    }
+
+    @Test
+    public void testClearNoteNotClear() {
+        sticky.assignNotes("hello");
+        sticky.clearNote();
+        assertEquals("", sticky.getNotes());
     }
 
 
