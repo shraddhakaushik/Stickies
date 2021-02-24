@@ -1,15 +1,15 @@
 package ui;
 
 import model.StickyNote;
+import model.SavedNotes;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 // Sticky notes application
 public class StickyNoteApp {
     private StickyNote sticky;
     private Scanner typed;
-    private ArrayList<StickyNote> savedNotes = new ArrayList<>();
+    private SavedNotes savedNotes = new SavedNotes();
     private String op = "";
 
     //EFFECTS: constructor for StickyNoteApp
@@ -27,7 +27,7 @@ public class StickyNoteApp {
         while (keepGoing) {
             op = typed.nextLine();
             if (op.equals("SAVE")) {
-                savedNotes.add(stick);
+                savedNotes.getSavedNotes().add(stick);
                 System.out.println("Note saved!");
             } else if (op.equals("CLEAR")) {
                 clearNote(stick);
@@ -44,7 +44,6 @@ public class StickyNoteApp {
                 stick.assignNotes(op);
             }
         }
-
     }
 
     //EFFECTS: sets up note for user
@@ -64,7 +63,7 @@ public class StickyNoteApp {
         System.out.println("searching...");
 
         boolean found = false;
-        for (StickyNote note : savedNotes) {
+        for (StickyNote note : savedNotes.getSavedNotes()) {
             if (note.isName(input)) {
                 System.out.println("Note found! type ACCESS to access note");
                 getNote(note);
