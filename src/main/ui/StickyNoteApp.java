@@ -125,13 +125,16 @@ public class StickyNoteApp {
         if (typed.nextLine().equals("yes")) {
             System.out.println("Type name below");
             String op = typed.nextLine();
+            Boolean found = true;
             for (StickyNote stickyNote : savedNotes.getSavedNotes()) {
                 if (stickyNote.getName().equals(op)) {
                     System.out.println("Sorry, this name is taken!");
-                    break;
+                    found = false;
                 }
             }
-            sticky.assignName(op);
+            if (found) {
+                sticky.assignName(op);
+            }
             System.out.println("New note: " + sticky.getName());
         } else {
             System.out.println("New note: " + sticky.getName());
