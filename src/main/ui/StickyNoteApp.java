@@ -159,7 +159,7 @@ public class StickyNoteApp {
         try {
             jsonWriter.open();
             jsonWriter.write(savedNotes);
-            jsonWriter.quit();
+            jsonWriter.close();
             System.out.println("Saved to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
@@ -170,7 +170,7 @@ public class StickyNoteApp {
     //EFFECTS: loads saved notes from file
     private void loadSavedNotes() {
         try {
-            savedNotes = jsonReader.reader();
+            savedNotes = jsonReader.read();
             System.out.println("Loaded from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);

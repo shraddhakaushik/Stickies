@@ -32,7 +32,7 @@ public class JsonWriter {
 
     //MODIFIES: this
     //EFFECTS: quits writer
-    public void quit() {
+    public void close() {
         writer.close();
     }
 

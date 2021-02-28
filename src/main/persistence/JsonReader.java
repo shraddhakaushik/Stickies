@@ -22,7 +22,7 @@ public class JsonReader {
     }
 
     //EFFECTS: reads and returns saved notes from file, and throws IOException if an error occurs in reading
-    public SavedNotes reader() throws IOException {
+    public SavedNotes read() throws IOException {
         String data = readSource(source);
         JSONObject object = new JSONObject(data);
         return parseSavedNotes(object);

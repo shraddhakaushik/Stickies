@@ -16,7 +16,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/noSuchFile.json");
         try {
-            SavedNotes sn = reader.reader();
+            SavedNotes sn = reader.read();
             fail("IOException e");
         } catch (IOException e) {
             // pass
@@ -27,7 +27,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderEmptySavedNotes() {
         JsonReader reader = new JsonReader("./data/testReaderEmptySavedNotes.json");
         try {
-            SavedNotes sn = reader.reader();
+            SavedNotes sn = reader.read();
             assertEquals("My notes", sn.getName());
             assertEquals(0, sn.getSavedNotes().size());
         } catch (IOException e) {
@@ -39,7 +39,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderGeneralSN() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralSavedNotes.json");
         try {
-            SavedNotes sn = reader.reader();
+            SavedNotes sn = reader.read();
             assertEquals(2, sn.getSavedNotes().size());
             checkSticky("untitled", "", sn.getSavedNotes().get(0));
             checkSticky("bloop", "hi", sn.getSavedNotes().get(1));
