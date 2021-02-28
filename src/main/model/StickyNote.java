@@ -1,5 +1,8 @@
 package model;
 
+
+import org.json.JSONObject;
+
 // Represents a sticky note having a name and notes
 public class StickyNote {
     private String name; // tracks name of sticky note through name changes
@@ -46,4 +49,16 @@ public class StickyNote {
     public void clearNote() {
         notes = "";
     }
+
+
+    //EFFECTS: returns sticky note as a JSON object
+    //TODO citation: code taken and modified from Thingy.java in JsonSerializationDemo
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("notes", notes);
+        return json;
+    }
+
 }
+
