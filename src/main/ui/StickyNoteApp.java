@@ -19,7 +19,7 @@ public class StickyNoteApp {
     private String op = "";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private boolean keepGoing;
+    private boolean keepGoing = true;
 
     //EFFECTS: constructor for StickyNoteApp
     public StickyNoteApp() {
@@ -33,7 +33,6 @@ public class StickyNoteApp {
 
     //EFFECTS: Interacts with user, keeps track of what user is typing, and responds to given commands appropriately
     private void processTyped(StickyNote stick) {
-        keepGoing = true;
         startInteraction(stick);
         while (keepGoing) {
             processor(stick);
@@ -125,20 +124,18 @@ public class StickyNoteApp {
         System.out.println("Would you like to change the name this note? Type yes to name");
         if (typed.nextLine().equals("yes")) {
             System.out.println("Type name below");
-            checkTakenName(typed.nextLine());
+            String op = typed.nextLine();
+            for (StickyNote stickyNote : savedNotes.getSavedNotes()) {
+                if (stickyNote.getName().equals(op)) {
+                    System.out.println("Sorry, this name is taken!");
+                    break;
+                }
+            }
+            sticky.assignName(op);
             System.out.println("New note: " + sticky.getName());
         } else {
             System.out.println("New note: " + sticky.getName());
         }
-    }
-
-    public void checkTakenName(String name) {
-        for (StickyNote stick : savedNotes.getSavedNotes()) {
-            if (name.equals(stick.getName())) {
-                System.out.println("Sorry, a note with this name already exists!");
-            }
-        }
-        sticky.assignName(name);
     }
 
 
