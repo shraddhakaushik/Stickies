@@ -91,7 +91,7 @@ public class StickyNoteApp {
         boolean found = false;
         for (StickyNote note : savedNotes.getSavedNotes()) {
             if (note.isName(input)) {
-                System.out.println("Note found! type ACCESS to access note");
+                System.out.println("Note found! type VIEW to view note, or EDIT to edit note");
                 getNote(note);
                 found = true;
                 break;
@@ -104,12 +104,16 @@ public class StickyNoteApp {
 
     //EFFECTS: If "ACCESS" is typed, accesses note and returns the note's details including name and notes
     public void getNote(StickyNote sticky) {
-        if (typed.nextLine().equals("ACCESS")) {
+        String op = typed.nextLine();
+        if (op.equals("VIEW")) {
             System.out.println("*************************************");
             System.out.println("Note name: " + sticky.getName());
             System.out.println("________________________________");
             System.out.println("Notes: " + sticky.getNotes());
             System.out.println("*************************************");
+        } else if (op.equals("EDIT")) {
+            System.out.println("Editing note: " + sticky.getName());
+            editNote(sticky);
         } else {
             System.out.println("Not accessing note");
         }
@@ -153,6 +157,16 @@ public class StickyNoteApp {
             System.out.println("not clearing notes");
         }
     }
+
+    //MODIFIES: this
+    //EFFECTS: allows user to edit the name and notes of a saved note
+    public void editNote(StickyNote sticky) {
+        StickyNote newNote = new StickyNote(sticky.getName(), sticky.getNotes());
+        int pos = savedNotes.getSavedNotes().indexOf(sticky);
+        savedNotes.getSavedNotes().set(pos, newNote);
+        processTyped(newNote);
+    }
+
 
     //EFFECTS: saves saved notes to file
     private void saveSavedNotes() {
