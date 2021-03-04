@@ -17,7 +17,7 @@ as well as to other students and professionals working centrally with their comp
 
 **USER STORIES:**
 
-*IMPLEMENTED FOR PHASE ONE*:
+*IMPLEMENTED*:
 - As a user, I want to be able to create a new sticky note at any point
 - As a user, I want to be able to add any number of notes to a sticky note
 - As a user, I want to be able to save any number of sticky notes to a list of saved notes
@@ -26,11 +26,11 @@ as well as to other students and professionals working centrally with their comp
 - As a user, I want to be able to clear my notes from a sticky note
 - As a user, I want to be able to find, access, and view any saved sticky note from my list of saved notes
 - As a user, I want to be able to quit my note at any point
-
-*GOALS*:
 - As a user, I want to be able to save my notes to a file system to exist even after the program has terminated
 - As a user, I want to be able to access my saved notes from a file 
-- As a user, I want to be able to access and continue to take notes on a saved note
+- As a user, I want to be able to access, edit, and continue to take notes on a saved note
+
+*GOALS*:
 - As a user, I want my sticky note to actually resemble a sticky note
 - As a user, I want to be able to create my own typing shortcuts
 - As a user, I want my sticky note to be able to perform simple arithmetic calculations
