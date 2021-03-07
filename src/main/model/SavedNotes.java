@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+//Represents the set of notes that have been saved through the program
 public class SavedNotes {
 
     ArrayList<StickyNote> savedNotes;
@@ -21,6 +22,7 @@ public class SavedNotes {
         return savedNotes;
     }
 
+    //EFFECTS: returns name of note
     public String getName() {
         return name;
     }

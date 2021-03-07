@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-// Sticky notes application
+// Represents a Sticky notes application
 //TODO citation: code partially taken and modified from WorkRoomApp.java in JsonSerializationDemo
 public class StickyNoteApp {
     private static final String JSON_STORE = "./data/workroom.json";
@@ -31,7 +31,7 @@ public class StickyNoteApp {
     }
 
 
-    //EFFECTS: Interacts with user, keeps track of what user is typing, and responds to given commands appropriately
+    //EFFECTS: Interacts with user and responds to given commands appropriately
     private void processTyped(StickyNote stick) {
         startInteraction(stick);
         while (keepGoing) {
@@ -39,6 +39,7 @@ public class StickyNoteApp {
         }
     }
 
+    //EFFECTS: Scans for recognized commands
     private void processor(StickyNote stick) {
         op = typed.nextLine();
         if (op.equals("SAVE")) {
