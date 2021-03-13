@@ -2,13 +2,15 @@ package ui;
 
 import model.StickyNote;
 import model.SavedNotes;
-import org.junit.jupiter.api.Test;
 import persistence.JsonWriter;
 import persistence.JsonReader;
+import ui.clickable.*;
+import ui.clickable.options.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 // Represents a Sticky notes application
 //TODO citation: code partially taken and modified from WorkRoomApp.java in JsonSerializationDemo
 public class StickyNoteApp extends JFrame {
-    private static final String JSON_STORE = "./data/workroom.json";
+    private static final String JSON_STORE = "./data/savedNotes.json";
     private StickyNote sticky;
     private Scanner typed;
     private SavedNotes savedNotes = new SavedNotes("NoteRoom");
@@ -29,9 +31,14 @@ public class StickyNoteApp extends JFrame {
     private JsonReader jsonReader;
     private boolean keepGoing = true;
     private List<Options> options;
-    private Options activeOp;
-    private JFrame menuFrame;
-    private JTextField notes;
+    private Clickable activeOp;
+    private JFrame frame;
+    private JMenu menu;
+    private JMenu noteMenu;
+    private JTextArea notes;
+    private String name;
+    private String noteNotes;
+    private Font font;
 
     //EFFECTS: constructor for StickyNoteApp
     public StickyNoteApp() {
@@ -49,68 +56,68 @@ public class StickyNoteApp extends JFrame {
         sticky = new StickyNote("untitled", "");
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
+        menu = new JMenu("Menu");
     }
 
 
 
-    public void saveNote(SaveNote note, JPanel panel) {
-        SavedSticky note1 = new SavedSticky(this, panel, sticky);
-        note.getSticky().assignNotes(notes.getText());
-        savedNotes.addNote(note.getSticky());
-        menuFrame.add(panel);
+    public void saveAs(StickyNote note) {
+        note.assignNotes(notes.getText());
+        savedNotes.addNote(note);
+        saveSavedNotes();
+        SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu);
+        savedStickyNote.addListener();
+    }
 
+
+
+    public void saveNote(StickyNote note) {
+        note.assignNotes(notes.getText());
+        savedNotes.addNote(note);
+        SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu);
+        savedStickyNote.addListener();
     }
 
     public void setupMainMenu() {
-        JPanel panel = new JPanel();
+        JMenuBar panel = new JMenuBar();
         NewNote newNote = new NewNote(this, panel);
-        SavedMenu menu = new SavedMenu(this, panel);
+
         panel.setLayout(new GridBagLayout());
         super.add(panel, BorderLayout.CENTER);
     }
 
 
+
     public void newSticky(StickyNote note) {
-        JFrame frame = new JFrame(note.getName());
+        menu = new JMenu("Menu");
+        String name = note.getName();
+        String noteNotes = note.getNotes();
+        font = new Font("Serif", Font.ITALIC, 16);
+        note = new StickyNote(note.getName(), note.getNotes());
+        frame = new JFrame(name);
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
         frame.setSize(200, 200);
-        notes = new JTextField();
+        notes = new JTextArea();
         notes.setSize(150, 150);
         notes.setText(note.getNotes());
+        notes.setFont(font);
         frame.add(notes, BorderLayout.CENTER);
         createOptions(frame);
+
     }
 
-    public void menu() {
-        menuFrame = new JFrame("menu");
-        menuFrame.setVisible(true);
-        menuFrame.setLayout(new BorderLayout());
-        JTextField searchBar = new JTextField();
-        searchBar.setSize(0, 0);
-        menuFrame.add(searchBar, BorderLayout.NORTH);
-        for (StickyNote stick : savedNotes.getSavedNotes()) {
-            JPanel panel = new JPanel();
-            SaveNote saveNote = new SaveNote(this, panel, stick);
-            saveNote(saveNote, panel);
-            menuFrame.add(panel, BorderLayout.CENTER);
-        }
+    public void setColor(Color bgCol) {
+        frame.setBackground(bgCol);
+        notes.setBackground(bgCol);
     }
 
-    public void getMenuFrame() {
-        menuFrame.setVisible(true);
+    public ArrayList<StickyNote> getSavedNotes() {
+        return savedNotes.getSavedNotes();
     }
 
-    public void edit(JFrame frame) {
-        JButton rename = new JButton("Rename");
-        JButton colour = new JButton("Colour");
-        JButton font = new JButton("Font");
-        JPopupMenu choices = new JPopupMenu();
-        choices.setVisible(true);
-        choices.setInvoker(frame);
-        choices.add(rename);
-        choices.add(colour);
-        choices.add(font);
+    public JMenu getMenu() {
+        return menu;
     }
 
 
@@ -276,8 +283,7 @@ public class StickyNoteApp extends JFrame {
     }
 
     private void createOptions(JFrame stickyFrame) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout());
+        JMenuBar panel = new JMenuBar();
         panel.setSize(0, 0);
         stickyFrame.add(panel, BorderLayout.NORTH);
 
@@ -293,23 +299,26 @@ public class StickyNoteApp extends JFrame {
         NewNote newNote = new NewNote(this, panel);
         options.add(newNote);
 
-        SavedMenu savedMenu = new SavedMenu(this, panel);
-        options.add(savedMenu);
+        panel.add(menu);
 
         SaveNote saveNote = new SaveNote(this, panel, sticky);
         options.add(saveNote);
 
-        setActiveOption(newNote);
+        setActiveChoice(newNote);
 
     }
 
 
-    public void setActiveOption(Options option) {
+    public void setActiveChoice(Clickable option) {
         if (activeOp != null) {
             activeOp.deactivate();
         }
         option.activate();
         activeOp = option;
     }
+
+
+
+
 
 }

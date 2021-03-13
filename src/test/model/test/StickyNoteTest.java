@@ -1,5 +1,6 @@
-package model;
+package model.test;
 
+import model.StickyNote;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

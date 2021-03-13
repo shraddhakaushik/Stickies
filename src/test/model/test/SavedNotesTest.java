@@ -1,4 +1,4 @@
-package model;
+package model.test;
 
 import model.StickyNote;
 import model.SavedNotes;

@@ -1,30 +1,34 @@
-package ui;
+package ui.clickable.options;
+
+import ui.StickyNoteApp;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SavedMenu extends Options {
-    public SavedMenu(StickyNoteApp noteApp, JComponent parent) {
+
+    public SavedMenu(StickyNoteApp noteApp, JMenuBar parent) {
         super(noteApp, parent);
     }
 
     @Override
-    public void createButton(JComponent parent) {
-        button = new JButton("Menu");
-        addToParent(parent);
+    public void createMenu(JMenuBar parent) {
+        menu = new JMenu("Menu");
+        parent.add(menu);
     }
+
 
     @Override
     public void addListener() {
-        button.addActionListener(new SavedMenuClickHandler());
+        menu.addActionListener(new SavedMenuClickHandler());
     }
 
     private class SavedMenuClickHandler implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveOption(SavedMenu.this);
-            noteApp.getMenuFrame();
+            noteApp.setActiveChoice(SavedMenu.this);
+            menu = noteApp.getMenu();
         }
     }
 }
