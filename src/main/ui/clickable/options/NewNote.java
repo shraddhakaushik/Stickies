@@ -4,6 +4,7 @@ import model.StickyNote;
 import ui.StickyNoteApp;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,7 +34,9 @@ public class NewNote extends Options {
 
         public void actionPerformed(ActionEvent e) {
             noteApp.setActiveChoice(NewNote.this);
-            StickyNote defaultNote = new StickyNote("untitled", "");
+            Color col = Color.WHITE;
+            Font font = new Font(Font.MONOSPACED, Font.ITALIC, 12);
+            StickyNote defaultNote = new StickyNote("untitled", "", col, font);
             noteApp.newSticky(defaultNote);
         }
     }

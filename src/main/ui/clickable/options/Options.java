@@ -5,17 +5,15 @@ import ui.StickyNoteApp;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 public abstract class Options extends Clickable {
 
     protected JMenu menu;
-    protected StickyNoteApp noteApp;
     private boolean active;
+    protected StickyNoteApp noteApp;
 
-
-    public Options(StickyNoteApp noteApp, JMenuBar parent) {
-        this.noteApp = noteApp;
+    public Options(StickyNoteApp app, JMenuBar parent) {
+        noteApp = app;
         super.parent = parent;
         createMenu(parent);
         parent.add(menu);
@@ -39,5 +37,8 @@ public abstract class Options extends Clickable {
 
     public abstract void addListener();
 
+    public StickyNoteApp getNoteApp() {
+        return noteApp;
+    }
 
 }

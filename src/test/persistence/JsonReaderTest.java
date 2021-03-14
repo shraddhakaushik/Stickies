@@ -41,8 +41,8 @@ public class JsonReaderTest extends JsonTest {
         try {
             SavedNotes sn = reader.read();
             assertEquals(2, sn.getSavedNotes().size());
-            checkSticky("untitled", "", sn.getSavedNotes().get(0));
-            checkSticky("bloop", "hi", sn.getSavedNotes().get(1));
+            checkSticky("untitled", "", "WHITE", "MONOSPACED", 0, 12, sn.getSavedNotes().get(0));
+            checkSticky("bloop", "hi", "WHITE", "MONOSPACED", 0, 12, sn.getSavedNotes().get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

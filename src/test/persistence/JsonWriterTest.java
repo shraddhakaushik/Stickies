@@ -2,8 +2,10 @@ package persistence;
 
 import model.SavedNotes;
 import model.StickyNote;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,6 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 //TODO citation: code taken and modified from JsonWriterTest.java in JsonSerializationDemo
 public class JsonWriterTest extends JsonTest {
+    private Font font;
+
+    @BeforeEach
+    void setupFont() {
+        font = new Font(Font.MONOSPACED, Font.PLAIN, 12);
+    }
+
 
     @Test
     void testWriterInvalidFile() {
@@ -46,8 +55,8 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralSavedNotes() {
         try {
             SavedNotes sn = new SavedNotes("My notes");
-            sn.addNote(new StickyNote("untitled",""));
-            sn.addNote(new StickyNote("bloop","hello"));
+            sn.addNote(new StickyNote("untitled","", Color.WHITE, font));
+            sn.addNote(new StickyNote("bloop","hello", Color.WHITE, font));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralNotes.json");
             writer.open();
             writer.write(sn);
@@ -57,8 +66,8 @@ public class JsonWriterTest extends JsonTest {
             sn = reader.read();
             assertEquals("My notes", sn.getName());
             assertEquals(2, sn.getSavedNotes().size());
-            checkSticky("untitled","", sn.getSavedNotes().get(0));
-            checkSticky("bloop","hello", sn.getSavedNotes().get(1));
+            checkSticky("untitled","", "WHITE", "MONOSPACED", 0, 12, sn.getSavedNotes().get(0));
+            checkSticky("bloop","hello", "WHITE", "MONOSPACED", 0, 12, sn.getSavedNotes().get(1));
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

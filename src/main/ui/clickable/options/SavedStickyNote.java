@@ -16,6 +16,7 @@ public class SavedStickyNote extends JMenuItem {
         super(stickyNote.getName());
         this.stickyNote = stickyNote;
         createItem(parent);
+        addListener();
     }
 
     public void createItem(JMenu parent) {
@@ -30,10 +31,11 @@ public class SavedStickyNote extends JMenuItem {
         return stickyNote;
     }
 
-    private class StickyClickHandler implements ActionListener {
+    public class StickyClickHandler implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            noteApp = new StickyNoteApp();
             noteApp.newSticky(stickyNote);
         }
     }

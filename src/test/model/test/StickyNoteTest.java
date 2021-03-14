@@ -4,14 +4,18 @@ import model.StickyNote;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StickyNoteTest {
     private StickyNote sticky;
+    private Font font;
 
     @BeforeEach
     public void setup() {
-        sticky = new StickyNote("untitled","");
+        sticky = new StickyNote("untitled","", Color.WHITE, font);
+        this.font = new Font(Font.SANS_SERIF, Font.PLAIN, 10);
     }
 
     @Test
@@ -58,6 +62,32 @@ class StickyNoteTest {
         sticky.clearNote();
         assertEquals("", sticky.getNotes());
     }
+
+    @Test
+    public void testAssignColorNoChange() {
+        sticky.assignColor(Color.WHITE);
+        assertEquals(Color.WHITE, sticky.getColor());
+    }
+
+    @Test
+    public void testAssignColorChange() {
+        sticky.assignColor(Color.BLACK);
+        assertEquals(Color.BLACK, sticky.getColor());
+    }
+
+    @Test
+    public void testAssignFontNoChange() {
+        sticky.assignFont(font);
+        assertEquals(font, sticky.getFont());
+    }
+
+    @Test
+    public void testAssignFontChange() {
+        Font newFont = new Font(Font.MONOSPACED, Font.ITALIC, 12);
+        sticky.assignFont(newFont);
+        assertEquals(newFont, sticky.getFont());
+    }
+
 
 
 }

@@ -3,6 +3,7 @@ package persistence;
 import model.StickyNote;
 import model.SavedNotes;
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -61,7 +62,13 @@ public class JsonReader {
     private void addNote(SavedNotes sn, JSONObject object) {
         String name = object.getString("name");
         String notes = object.getString("notes");
-        StickyNote sticky = new StickyNote(name, notes);
+        String col = object.getString("color");
+        String fontFam = object.getString("fontFamily");
+        int fontStyle = object.getInt("fontStyle");
+        int fontSize = object.getInt("fontSize");
+        Font font = new Font(fontFam, fontStyle, fontSize);
+        Color color = Color.getColor(col);
+        StickyNote sticky = new StickyNote(name, notes, color, font);
         sn.addNote(sticky);
     }
 

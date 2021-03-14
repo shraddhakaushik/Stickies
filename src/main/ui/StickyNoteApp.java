@@ -39,6 +39,7 @@ public class StickyNoteApp extends JFrame {
     private String name;
     private String noteNotes;
     private Font font;
+    private Color color;
 
     //EFFECTS: constructor for StickyNoteApp
     public StickyNoteApp() {
@@ -53,7 +54,11 @@ public class StickyNoteApp extends JFrame {
         super.setVisible(true);
         super.setSize(600, 600);
         setupMainMenu();
-        sticky = new StickyNote("untitled", "");
+        font = new Font(Font.SANS_SERIF, Font.ITALIC, 12);
+        noteNotes = "";
+        name = "untitled";
+        color = Color.WHITE;
+        sticky = new StickyNote(name, noteNotes, color, font);
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
         menu = new JMenu("Menu");
@@ -66,7 +71,6 @@ public class StickyNoteApp extends JFrame {
         savedNotes.addNote(note);
         saveSavedNotes();
         SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu);
-        savedStickyNote.addListener();
     }
 
 
@@ -75,7 +79,6 @@ public class StickyNoteApp extends JFrame {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
         SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu);
-        savedStickyNote.addListener();
     }
 
     public void setupMainMenu() {
@@ -90,10 +93,11 @@ public class StickyNoteApp extends JFrame {
 
     public void newSticky(StickyNote note) {
         menu = new JMenu("Menu");
-        String name = note.getName();
-        String noteNotes = note.getNotes();
-        font = new Font("Serif", Font.ITALIC, 16);
-        note = new StickyNote(note.getName(), note.getNotes());
+        name = note.getName();
+        noteNotes = note.getNotes();
+        font = note.getFont();
+        color = note.getColor();
+        note = new StickyNote(name, noteNotes, color, font);
         frame = new JFrame(name);
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
@@ -108,8 +112,7 @@ public class StickyNoteApp extends JFrame {
     }
 
     public void setColor(Color bgCol) {
-        frame.setBackground(bgCol);
-        notes.setBackground(bgCol);
+        color = bgCol;
     }
 
     public ArrayList<StickyNote> getSavedNotes() {
@@ -119,6 +122,7 @@ public class StickyNoteApp extends JFrame {
     public JMenu getMenu() {
         return menu;
     }
+
 
 
     //EFFECTS: Interacts with user and responds to given commands appropriately
@@ -142,7 +146,7 @@ public class StickyNoteApp extends JFrame {
         } else if (op.equals("FIND")) {
             findSavedNote();
         } else if (op.equals("NEW")) {
-            StickyNote note = new StickyNote("untitled", "");
+            StickyNote note = new StickyNote("untitled", "", color, font);
             processTyped(note);
         } else if (op.equals("FILE")) {
             saveSavedNotes();
@@ -252,7 +256,7 @@ public class StickyNoteApp extends JFrame {
     //MODIFIES: this
     //EFFECTS: allows user to edit the name and notes of a saved note
     public void editNote(StickyNote sticky) {
-        StickyNote newNote = new StickyNote(sticky.getName(), sticky.getNotes());
+        StickyNote newNote = new StickyNote(sticky.getName(), sticky.getNotes(), sticky.getColor(), sticky.getFont());
         int pos = savedNotes.getSavedNotes().indexOf(sticky);
         savedNotes.getSavedNotes().set(pos, newNote);
         processTyped(newNote);
@@ -309,6 +313,7 @@ public class StickyNoteApp extends JFrame {
     }
 
 
+
     public void setActiveChoice(Clickable option) {
         if (activeOp != null) {
             activeOp.deactivate();
@@ -316,9 +321,6 @@ public class StickyNoteApp extends JFrame {
         option.activate();
         activeOp = option;
     }
-
-
-
 
 
 }
