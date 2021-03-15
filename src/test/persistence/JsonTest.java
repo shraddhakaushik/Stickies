@@ -5,12 +5,14 @@ import model.StickyNote;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonTest {
-    protected void checkSticky(String nm, String nt, String col, String ff, int fs, int fz, StickyNote sticky) {
+    protected void checkSticky(String nm, String nt, int r, int g, int b, String ff, int fs, int fz, StickyNote sticky) {
         assertEquals(nm, sticky.getName());
         assertEquals(nt, sticky.getNotes());
-        assertEquals(col, sticky.getColor().toString());
+        assertEquals(r, sticky.getColor().getRed());
+        assertEquals(g, sticky.getColor().getGreen());
+        assertEquals(b, sticky.getColor().getBlue());
         assertEquals(ff, sticky.getFont().getFamily());
-        assertEquals(ff, sticky.getFont().getStyle());
-        assertEquals(ff, sticky.getFont().getSize());
+        assertEquals(fs, sticky.getFont().getStyle());
+        assertEquals(fz, sticky.getFont().getSize());
     }
 }

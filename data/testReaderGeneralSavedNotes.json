@@ -3,11 +3,23 @@
   "notes": [
     {
       "name": "untitled",
-      "notes": ""
+      "notes": "",
+      "red": 255,
+      "blue": 255,
+      "green": 255,
+      "fontFamily": "Monospaced",
+      "fontStyle": 0,
+      "fontSize": 12
     },
     {
       "name": "bloop",
-      "notes": "hi"
+      "notes": "hi",
+      "red": 255,
+      "blue": 255,
+      "green": 255,
+      "fontFamily": "Monospaced",
+      "fontStyle": 0,
+      "fontSize": 12
     }
   ]
 }

@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Represents a Sticky notes application
 //TODO citation: code partially taken and modified from WorkRoomApp.java in JsonSerializationDemo
-public class StickyNoteApp extends JFrame {
+public class StickyNoteApp {
     private static final String JSON_STORE = "./data/savedNotes.json";
     private StickyNote sticky;
     private Scanner typed;
@@ -33,27 +33,23 @@ public class StickyNoteApp extends JFrame {
     private List<Options> options;
     private Clickable activeOp;
     private JFrame frame;
-    private JMenu menu;
-    private JMenu noteMenu;
     private JTextArea notes;
     private String name;
     private String noteNotes;
     private Font font;
     private Color color;
+    private NotesApp app;
+
 
     //EFFECTS: constructor for StickyNoteApp
-    public StickyNoteApp() {
-        super("Stickies");
+    public StickyNoteApp(NotesApp app) {
+        this.app = app;
         initializeNoteApp();
+        newSticky(sticky);
     }
 
     public void initializeNoteApp() {
         options = new ArrayList<>();
-        super.setLayout(new BorderLayout());
-        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        super.setVisible(true);
-        super.setSize(600, 600);
-        setupMainMenu();
         font = new Font(Font.SANS_SERIF, Font.ITALIC, 12);
         noteNotes = "";
         name = "untitled";
@@ -61,7 +57,7 @@ public class StickyNoteApp extends JFrame {
         sticky = new StickyNote(name, noteNotes, color, font);
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
-        menu = new JMenu("Menu");
+
     }
 
 
@@ -70,7 +66,7 @@ public class StickyNoteApp extends JFrame {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
         saveSavedNotes();
-        SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu);
+        SavedStickyNote savedStickyNote = new SavedStickyNote(note, app.getMenu(), app);
     }
 
 
@@ -78,21 +74,12 @@ public class StickyNoteApp extends JFrame {
     public void saveNote(StickyNote note) {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
-        SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu);
-    }
-
-    public void setupMainMenu() {
-        JMenuBar panel = new JMenuBar();
-        NewNote newNote = new NewNote(this, panel);
-
-        panel.setLayout(new GridBagLayout());
-        super.add(panel, BorderLayout.CENTER);
+        SavedStickyNote savedStickyNote = new SavedStickyNote(note, app.getMenu(), app);
     }
 
 
 
     public void newSticky(StickyNote note) {
-        menu = new JMenu("Menu");
         name = note.getName();
         noteNotes = note.getNotes();
         font = note.getFont();
@@ -102,10 +89,12 @@ public class StickyNoteApp extends JFrame {
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
         frame.setSize(200, 200);
+        frame.setBackground(color);
         notes = new JTextArea();
         notes.setSize(150, 150);
         notes.setText(note.getNotes());
         notes.setFont(font);
+        notes.setBackground(color);
         frame.add(notes, BorderLayout.CENTER);
         createOptions(frame);
 
@@ -113,14 +102,15 @@ public class StickyNoteApp extends JFrame {
 
     public void setColor(Color bgCol) {
         color = bgCol;
+        frame.setBackground(color);
+        notes.setBackground(color);
+        sticky.assignColor(color);
     }
 
-    public ArrayList<StickyNote> getSavedNotes() {
-        return savedNotes.getSavedNotes();
-    }
+
 
     public JMenu getMenu() {
-        return menu;
+        return app.getMenu();
     }
 
 
@@ -300,10 +290,10 @@ public class StickyNoteApp extends JFrame {
         FindNote findNote = new FindNote(this, panel);
         options.add(findNote);
 
-        NewNote newNote = new NewNote(this, panel);
+        NewNote newNote = new NewNote(this, panel, app);
         options.add(newNote);
 
-        panel.add(menu);
+        panel.add(app.getMenu());
 
         SaveNote saveNote = new SaveNote(this, panel, sticky);
         options.add(saveNote);

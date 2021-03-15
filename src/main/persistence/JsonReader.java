@@ -62,12 +62,14 @@ public class JsonReader {
     private void addNote(SavedNotes sn, JSONObject object) {
         String name = object.getString("name");
         String notes = object.getString("notes");
-        String col = object.getString("color");
+        int red = object.getInt("red");
+        int green = object.getInt("green");
+        int blue = object.getInt("blue");
         String fontFam = object.getString("fontFamily");
         int fontStyle = object.getInt("fontStyle");
         int fontSize = object.getInt("fontSize");
         Font font = new Font(fontFam, fontStyle, fontSize);
-        Color color = Color.getColor(col);
+        Color color = new Color(red, green, blue);
         StickyNote sticky = new StickyNote(name, notes, color, font);
         sn.addNote(sticky);
     }

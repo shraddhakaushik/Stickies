@@ -1,6 +1,7 @@
 package ui.clickable.options;
 
 import model.StickyNote;
+import ui.NotesApp;
 import ui.StickyNoteApp;
 
 import javax.swing.*;
@@ -10,11 +11,13 @@ import java.awt.event.ActionListener;
 public class SavedStickyNote extends JMenuItem {
     private StickyNote stickyNote;
     private StickyNoteApp noteApp;
+    private NotesApp notesApp;
 
 
-    public SavedStickyNote(StickyNote stickyNote, JMenu parent) {
+    public SavedStickyNote(StickyNote stickyNote, JMenu parent, NotesApp notesApp) {
         super(stickyNote.getName());
         this.stickyNote = stickyNote;
+        this.notesApp = notesApp;
         createItem(parent);
         addListener();
     }
@@ -35,7 +38,7 @@ public class SavedStickyNote extends JMenuItem {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            noteApp = new StickyNoteApp();
+            noteApp = new StickyNoteApp(notesApp);
             noteApp.newSticky(stickyNote);
         }
     }

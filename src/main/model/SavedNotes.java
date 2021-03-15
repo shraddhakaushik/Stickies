@@ -11,6 +11,7 @@ public class SavedNotes {
     ArrayList<StickyNote> savedNotes;
     String name;
 
+
     //EFFECTS: Constructs a new saved notes object with an empty arraylist
     public SavedNotes(String name) {
         savedNotes = new ArrayList<>();
@@ -39,6 +40,7 @@ public class SavedNotes {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("notes", notesToJson());
+
         return json;
     }
 

@@ -79,14 +79,18 @@ public class StickyNote {
     //EFFECTS: returns sticky note as a JSON object
     //TODO citation: code taken and modified from Thingy.java in JsonSerializationDemo
     public JSONObject toJson() {
-        String col = color.toString();
+        int rval = color.getRed();
+        int gval = color.getGreen();
+        int bval = color.getBlue();
         String fontFamily = this.font.getFamily();
         int fontStyle = this.font.getStyle();
         int fontSize = this.font.getSize();
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("notes", notes);
-        json.put("color", col);
+        json.put("red", rval);
+        json.put("green", gval);
+        json.put("blue", bval);
         json.put("fontFamily", fontFamily);
         json.put("fontStyle", fontStyle);
         json.put("fontSize", fontSize);
