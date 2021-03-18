@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// Represents a Sticky notes application
+// Represents a sticky note in a Sticky Notes application
 //TODO citation: code partially taken and modified from WorkRoomApp.java in JsonSerializationDemo
 public class StickyNoteApp {
     private static final String JSON_STORE = "./data/savedNotes.json";
@@ -39,16 +39,19 @@ public class StickyNoteApp {
     private Font font;
     private Color color;
     private NotesApp app;
+    private JMenu menu;
 
 
     //EFFECTS: constructor for StickyNoteApp
     public StickyNoteApp(NotesApp app) {
         this.app = app;
         initializeNoteApp();
-        newSticky(sticky);
     }
 
+    //MODIFIES: this
+    //EFFECTS: initializes all trivial fields and loads notes from saved JSON file
     public void initializeNoteApp() {
+        menu = new JMenu("Menu");
         options = new ArrayList<>();
         font = new Font(Font.SANS_SERIF, Font.ITALIC, 12);
         noteNotes = "";
@@ -57,28 +60,78 @@ public class StickyNoteApp {
         sticky = new StickyNote(name, noteNotes, color, font);
         jsonReader = new JsonReader(JSON_STORE);
         jsonWriter = new JsonWriter(JSON_STORE);
-
+        loadSavedNotes();
     }
 
 
-
+    //MODIFIES: this, note
+    //EFFECTS: adds the current note saved notes and menu, and saves to JSON file
     public void saveAs(StickyNote note) {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
         saveSavedNotes();
-        SavedStickyNote savedStickyNote = new SavedStickyNote(note, app.getMenu(), app);
+        addToMenu(note);
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: changes name of note frame and updates note's name property
+    public void rename(String name) {
+        sticky.assignName(name);
+        frame.setTitle(name);
+    }
 
+    //EFFECTS: adds given sticky note as a menu item to menu
+    public void addToMenu(StickyNote note) {
+        SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu, app);
+    }
+
+    //MODIFIES: this, note
+    //EFFECTS: saves the current note temporarily, only to saved notes and menu
     public void saveNote(StickyNote note) {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
-        SavedStickyNote savedStickyNote = new SavedStickyNote(note, app.getMenu(), app);
+        addToMenu(note);
     }
 
+    //MODIFIES: this
+    //EFFECTS: changes font style of sticky to style
+    public void fontStyleChange(int style) {
+        font = new Font(sticky.getFont().getName(), style, sticky.getFont().getSize());
+        sticky.assignFont(font);
+        notes.setFont(font);
+    }
 
+    //MODIFIES: this
+    //EFFECTS: changes font name of sticky to fam
+    public void fontNameChange(String name) {
+        font = new Font(name, sticky.getFont().getStyle(), sticky.getFont().getSize());
+        sticky.assignFont(font);
+        notes.setFont(font);
+    }
 
+    //MODIFIES: this
+    //EFFECTS: changes font size of sticky to given int
+    public void fontSizeChange(int size) {
+        font = new Font(sticky.getFont().getName(), sticky.getFont().getStyle(), size);
+        sticky.assignFont(font);
+        notes.setFont(font);
+    }
+
+    //MODIFIES: this
+    //EFFECTS: clears note
+    public void clearIt() {
+        int result = JOptionPane.showConfirmDialog(null, "Confirm clearing notes");
+        if (result == JOptionPane.YES_OPTION) {
+            notes.setText("");
+            frame.add(notes);
+            sticky.assignNotes("");
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: creates a new JFrame representing the given sticky note with the corresponding properties, adds each note
+    //          from file to menu, and adds options to note
     public void newSticky(StickyNote note) {
         name = note.getName();
         noteNotes = note.getNotes();
@@ -88,7 +141,7 @@ public class StickyNoteApp {
         frame = new JFrame(name);
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
-        frame.setSize(200, 200);
+        frame.setSize(500, 200);
         frame.setBackground(color);
         notes = new JTextArea();
         notes.setSize(150, 150);
@@ -97,9 +150,13 @@ public class StickyNoteApp {
         notes.setBackground(color);
         frame.add(notes, BorderLayout.CENTER);
         createOptions(frame);
-
+        for (StickyNote stickyNote : savedNotes.getSavedNotes()) {
+            addToMenu(stickyNote);
+        }
     }
 
+    //MODIFIES: this
+    //EFFECTS: changes the color of the note frame, text area, and updates the color property of the sticky note
     public void setColor(Color bgCol) {
         color = bgCol;
         frame.setBackground(color);
@@ -107,13 +164,44 @@ public class StickyNoteApp {
         sticky.assignColor(color);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates all option menus and adds them to options as well as a panel that is added to the sticky frame
+    private void createOptions(JFrame stickyFrame) {
+        JMenuBar panel = new JMenuBar();
+        panel.setSize(0, 0);
+        stickyFrame.add(panel, BorderLayout.NORTH);
 
+        ClearNote clrNote = new ClearNote(this, panel);
+        options.add(clrNote);
 
-    public JMenu getMenu() {
-        return app.getMenu();
+        EditNote editNote = new EditNote(this, panel);
+        options.add(editNote);
+
+        NewNote newNote = new NewNote(this, panel, app);
+        options.add(newNote);
+
+        panel.add(menu);
+
+        SaveNote saveNote = new SaveNote(this, panel, sticky);
+        options.add(saveNote);
+
+        setActiveChoice(newNote);
+
     }
 
 
+    //MODIFIES: this;
+    //EFFECTS: changes activeOp according to which option is selected
+    public void setActiveChoice(Clickable option) {
+        if (activeOp != null) {
+            activeOp.deactivate();
+        }
+        option.activate();
+        activeOp = option;
+    }
+
+
+    //EVERYTHING PAST THIS POINT BELONGS TO THE PREVIOUSLY IMPLEMENTED CONTROL LINE INTERFACE
 
     //EFFECTS: Interacts with user and responds to given commands appropriately
     private void processTyped(StickyNote stick) {
@@ -276,41 +364,7 @@ public class StickyNoteApp {
         }
     }
 
-    private void createOptions(JFrame stickyFrame) {
-        JMenuBar panel = new JMenuBar();
-        panel.setSize(0, 0);
-        stickyFrame.add(panel, BorderLayout.NORTH);
 
-        ClearNote clrNote = new ClearNote(this, panel);
-        options.add(clrNote);
-
-        EditNote editNote = new EditNote(this, panel);
-        options.add(editNote);
-
-        FindNote findNote = new FindNote(this, panel);
-        options.add(findNote);
-
-        NewNote newNote = new NewNote(this, panel, app);
-        options.add(newNote);
-
-        panel.add(app.getMenu());
-
-        SaveNote saveNote = new SaveNote(this, panel, sticky);
-        options.add(saveNote);
-
-        setActiveChoice(newNote);
-
-    }
-
-
-
-    public void setActiveChoice(Clickable option) {
-        if (activeOp != null) {
-            activeOp.deactivate();
-        }
-        option.activate();
-        activeOp = option;
-    }
 
 
 }

@@ -6,6 +6,8 @@ import ui.StickyNoteApp;
 import javax.swing.*;
 import java.awt.*;
 
+//TODO Citation: code inspired by Tool abstract class in SimpleDrawingPlayer
+//TODO URL:
 public abstract class Options extends Clickable {
 
     protected JMenu menu;
@@ -40,5 +42,6 @@ public abstract class Options extends Clickable {
     public StickyNoteApp getNoteApp() {
         return noteApp;
     }
+
 
 }

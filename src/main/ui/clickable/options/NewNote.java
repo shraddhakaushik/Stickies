@@ -40,6 +40,7 @@ public class NewNote extends Options {
             Color col = Color.WHITE;
             Font font = new Font(Font.SANS_SERIF, Font.ITALIC, 12);
             StickyNote defaultNote = new StickyNote("untitled", "", col, font);
+            noteApp.newSticky(defaultNote);
         }
     }
 }

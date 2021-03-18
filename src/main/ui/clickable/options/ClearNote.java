@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ClearNote extends Options {
+    private JMenuItem clear;
 
     public ClearNote(StickyNoteApp noteApp, JMenuBar parent) {
         super(noteApp, parent);
@@ -16,19 +17,21 @@ public class ClearNote extends Options {
     @Override
     public void createMenu(JMenuBar parent) {
         menu = new JMenu("Clear");
+        clear = new JMenuItem("Clear Notes");
+        menu.add(clear);
         parent.add(menu);
     }
 
     @Override
     public void addListener() {
-        menu.addActionListener(new ClearNoteClickHandler());
+        clear.addActionListener(new ClearNoteClickHandler());
     }
 
     private class ClearNoteClickHandler implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             noteApp.setActiveChoice(ClearNote.this);
-
+            noteApp.clearIt();
         }
     }
 }

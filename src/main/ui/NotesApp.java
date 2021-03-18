@@ -2,25 +2,25 @@ package ui;
 
 
 import ui.clickable.options.NewNote;
-import ui.clickable.options.SavedStickyNote;
 
 import javax.swing.*;
 import java.awt.*;
 
+//Represents a Sticky Notes application
 public class NotesApp extends JFrame {
     private StickyNoteApp stickyApp;
-    private JMenu menu;
 
+    //EFFECTS: constructor for notes app
     public NotesApp() {
         super("Stickies");
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setSize(600, 600);
+        setSize(300, 300);
         setupMainMenu();
-        menu = new JMenu("Menu");
     }
 
+    //EFFECTS: sets up the starting menu
     public void setupMainMenu() {
         JMenuBar panel = new JMenuBar();
         NewNote newNote = new NewNote(stickyApp, panel, this);
@@ -28,7 +28,4 @@ public class NotesApp extends JFrame {
         add(panel, BorderLayout.CENTER);
     }
 
-    public JMenu getMenu() {
-        return menu;
-    }
 }
