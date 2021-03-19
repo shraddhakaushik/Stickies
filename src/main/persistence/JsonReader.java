@@ -14,6 +14,7 @@ import org.json.*;
 
 //Represents a reader that reads saved notes from JSON data stored in file
 //TODO citation: code taken and modified from JsonReader.java in JsonSerializationDemo
+//TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonReader {
     private String source;
 

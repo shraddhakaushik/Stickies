@@ -1,4 +1,4 @@
-package ui.clickable.options;
+package ui.options;
 
 import model.StickyNote;
 import ui.StickyNoteApp;
@@ -50,7 +50,6 @@ public class SaveNote extends Options {
         //MODIFIES: this
         //EFFECTS: saves sticky note temporarily
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(SaveNote.this);
             noteApp.saveNote(stickyNote);
         }
     }
@@ -61,7 +60,6 @@ public class SaveNote extends Options {
         //MODIFIES: this
         //EFFECTS: saves sticky note to JSON file
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(SaveNote.this);
             noteApp.saveAs(stickyNote);
         }
     }

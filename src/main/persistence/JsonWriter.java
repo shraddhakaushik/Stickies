@@ -7,6 +7,7 @@ import java.io.*;
 
 //Represents a writer that writes a JSON representation of saved notes to file
 //TODO citation: code taken and modified from JsonWriter.java package in JsonSerializationDemo
+//TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

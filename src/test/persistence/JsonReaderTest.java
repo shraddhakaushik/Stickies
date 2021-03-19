@@ -10,6 +10,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 //TODO citation: code taken and modified from JsonReaderTest.java in JsonSerializationDemo
+//TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonReaderTest extends JsonTest {
 
     @Test

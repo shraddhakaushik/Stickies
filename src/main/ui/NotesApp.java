@@ -1,7 +1,7 @@
 package ui;
 
 
-import ui.clickable.options.NewNote;
+import ui.options.NewNote;
 
 import javax.swing.*;
 import java.awt.*;

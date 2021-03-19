@@ -1,18 +1,19 @@
 package ui;
 
+
 import model.StickyNote;
 import model.SavedNotes;
 import persistence.JsonWriter;
 import persistence.JsonReader;
-import ui.clickable.*;
-import ui.clickable.options.*;
+import ui.options.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Represents a sticky note in a Sticky Notes application
 //TODO citation: code partially taken and modified from WorkRoomApp.java in JsonSerializationDemo
+//TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+//TODO citation: code inspired by SimpleDrawingPlayer project
+//TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class StickyNoteApp {
     private static final String JSON_STORE = "./data/savedNotes.json";
     private StickyNote sticky;
@@ -31,7 +36,6 @@ public class StickyNoteApp {
     private JsonReader jsonReader;
     private boolean keepGoing = true;
     private List<Options> options;
-    private Clickable activeOp;
     private JFrame frame;
     private JTextArea notes;
     private String name;
@@ -133,6 +137,7 @@ public class StickyNoteApp {
     //EFFECTS: creates a new JFrame representing the given sticky note with the corresponding properties, adds each note
     //          from file to menu, and adds options to note
     public void newSticky(StickyNote note) {
+        playSound();
         name = note.getName();
         noteNotes = note.getNotes();
         font = note.getFont();
@@ -152,6 +157,25 @@ public class StickyNoteApp {
         createOptions(frame);
         for (StickyNote stickyNote : savedNotes.getSavedNotes()) {
             addToMenu(stickyNote);
+        }
+    }
+
+
+    //EFFECTS: plays pop sound
+    public void playSound() {
+        String pop = "./data/pop.wav";
+        try {
+            File path = new File(pop);
+            if (path.exists()) {
+                AudioInputStream input = AudioSystem.getAudioInputStream(path);
+                Clip clip = AudioSystem.getClip();
+                clip.open(input);
+                clip.start();
+            } else {
+                System.out.println("file not found");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -185,20 +209,10 @@ public class StickyNoteApp {
         SaveNote saveNote = new SaveNote(this, panel, sticky);
         options.add(saveNote);
 
-        setActiveChoice(newNote);
 
     }
 
 
-    //MODIFIES: this;
-    //EFFECTS: changes activeOp according to which option is selected
-    public void setActiveChoice(Clickable option) {
-        if (activeOp != null) {
-            activeOp.deactivate();
-        }
-        option.activate();
-        activeOp = option;
-    }
 
 
     //EVERYTHING PAST THIS POINT BELONGS TO THE PREVIOUSLY IMPLEMENTED CONTROL LINE INTERFACE

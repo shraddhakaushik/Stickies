@@ -1,4 +1,4 @@
-package ui.clickable.options;
+package ui.options;
 
 import ui.StickyNoteApp;
 
@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Represents an "Edit" menu
 public class EditNote extends Options {
     private JMenuItem rename;
     private JMenuItem recolour;
@@ -22,11 +23,13 @@ public class EditNote extends Options {
     private JMenuItem monospaced;
 
 
-
+    //EFFECTS: constructor for EditNote
     public EditNote(StickyNoteApp noteApp, JMenuBar parent) {
         super(noteApp, parent);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates and sets up an "Edit" menu
     @Override
     public void createMenu(JMenuBar parent) {
         menu = new JMenu("Edit");
@@ -38,6 +41,8 @@ public class EditNote extends Options {
         menu.add(recolour);
     }
 
+    //MODIFIES: this
+    //EFFECTS: Initializes the font editing options
     public void initializeFontEditor() {
         font = new JMenu("Change Font");
         fontType = new JMenu("Change Font");
@@ -61,9 +66,11 @@ public class EditNote extends Options {
         menu.add(font);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds action listeners to all menu items
     @Override
     public void addListener() {
-        recolour.addActionListener(new EditNoteClickHandler());
+        recolour.addActionListener(new RecolourClickHandler());
         rename.addActionListener(new RenameClickHandler());
         plain.addActionListener(new StyleClickHandler());
         bold.addActionListener(new StyleClickHandler());
@@ -74,21 +81,14 @@ public class EditNote extends Options {
         fontSize.addActionListener(new FontSizeClickHandler());
     }
 
-    private class EditNoteClickHandler implements ActionListener {
+    //Represents an action listener for recolour
+    private class RecolourClickHandler implements ActionListener {
 
         JColorChooser colourSwatch = new JColorChooser();
 
-        private class OkListener implements ActionListener {
-
-            public void actionPerformed(ActionEvent e) {
-                Color col = colourSwatch.getColor();
-                noteApp.setColor(col);
-            }
-
-        }
-
+        //MODIFIES: this
+        //EFFECTS: creates a colour chooser for the user to edit the note colour
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(EditNote.this);
 
             JDialog swatch = JColorChooser.createDialog(null, "Colour:",
                     false, colourSwatch, new OkListener(), null);
@@ -96,14 +96,27 @@ public class EditNote extends Options {
             colourSwatch.setColor(Color.WHITE);
             swatch.setVisible(true);
         }
+
+        //Represents an action listener for the OK button on the colour chooser
+        private class OkListener implements ActionListener {
+
+            //MODIFIES: this
+            //EFFECTS: Gets the colour selected from the chooser and applies it to the note frame
+            public void actionPerformed(ActionEvent e) {
+                Color col = colourSwatch.getColor();
+                noteApp.setColor(col);
+            }
+
+        }
     }
 
+    //Represents an action listener for rename
     private class RenameClickHandler implements ActionListener {
 
-
+        //MODIFIES: this
+        //EFFECTS: sets the note's name to whatever the user enters in the option pane
         @Override
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(EditNote.this);
             String name = JOptionPane.showInputDialog(null,
                     "Enter name",
                     "Confirm name",
@@ -113,11 +126,13 @@ public class EditNote extends Options {
         }
     }
 
+    //Represents an action listener for font size
     private class FontSizeClickHandler implements ActionListener {
 
+        //MODIFIES: this
+        //EFFECTS: sets font size to whatever user enters in option pane
         @Override
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(EditNote.this);
             String size = JOptionPane.showInputDialog(null, "Enter size",
                     "Only input integer values",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -126,10 +141,13 @@ public class EditNote extends Options {
         }
     }
 
+    //Represents an action listener for font style
     private class StyleClickHandler implements ActionListener {
+
+        //MODIFIES: this
+        //EFFECTS: sets font style to style selected by user
         @Override
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(EditNote.this);
             if (e.getSource() == plain) {
                 noteApp.fontStyleChange(Font.PLAIN);
             } else if (e.getSource() == bold) {
@@ -140,11 +158,13 @@ public class EditNote extends Options {
         }
     }
 
+    //Represents an action listener for font type
     private class FontTypeClickHandler implements ActionListener {
 
+        //MODIFIES: this
+        //EFFECTS: sets font type to type selected by user
         @Override
         public void actionPerformed(ActionEvent e) {
-            noteApp.setActiveChoice(EditNote.this);
             if (e.getSource() == sansSerif) {
                 noteApp.fontNameChange(Font.SANS_SERIF);
             } else if (e.getSource() == serif) {

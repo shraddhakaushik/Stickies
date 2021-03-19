@@ -29,14 +29,18 @@ as well as to other students and professionals working centrally with their comp
 - As a user, I want to be able to save my notes to a file system to exist even after the program has terminated
 - As a user, I want to be able to access my saved notes from a file 
 - As a user, I want to be able to access, edit, and continue to take notes on a saved note
+- As a user, I want my sticky note to actually resemble a sticky note
+- As a user, I want to be able to customise the colour of my sticky note
+- As a user, I want to be able to change my typing font
+- As a user, I want my note to play a sound every time I open a new note
+- As a user, I want to be able to change the size of my font
+- As a user, I want to be able to italicize or bold my sticky note
+- As a user, I want to be able to save a note temporarily 
 
 *GOALS*:
-- As a user, I want my sticky note to actually resemble a sticky note
 - As a user, I want to be able to create my own typing shortcuts
 - As a user, I want my sticky note to be able to perform simple arithmetic calculations
 - As a user, I want my sticky note to be able to keep track of the time at which I have created the note
-- As a user, I want to be able to customise the colour of my sticky note
-- As a user, I want to be able to change my typing font
 - As a user, I want to be able to input images onto my sticky note
 
 

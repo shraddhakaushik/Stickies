@@ -4,7 +4,7 @@ package model;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
+
 
 // Represents a sticky note having a name and notes
 public class StickyNote {
@@ -78,6 +78,7 @@ public class StickyNote {
 
     //EFFECTS: returns sticky note as a JSON object
     //TODO citation: code taken and modified from Thingy.java in JsonSerializationDemo
+    //TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     public JSONObject toJson() {
         int rval = color.getRed();
         int gval = color.getGreen();

@@ -46,6 +46,7 @@ public class SavedNotes {
 
     //EFFECTS: returns saved notes as JSON array
     //TODO citation: code taken and modified from WorkRoom.java in JsonSerializationDemo
+    //TODO URL: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     private JSONArray notesToJson() {
         JSONArray jsonArray = new JSONArray();
 
