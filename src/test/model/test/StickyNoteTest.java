@@ -24,10 +24,11 @@ class StickyNoteTest {
     }
 
     @Test
-    public void testAssignNameChanged() {
+    public void testAssignNameChangedDoesntExist() {
         sticky.assignName("new name");
         assertEquals("new name", sticky.getName());
     }
+
 
     @Test
     public void testAssignNotesNoNotes(){

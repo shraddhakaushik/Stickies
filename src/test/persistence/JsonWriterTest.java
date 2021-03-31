@@ -58,7 +58,7 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralSavedNotes() {
         try {
             SavedNotes sn = new SavedNotes("My notes");
-            sn.addNote(new StickyNote("untitled","", color, font));
+             sn.addNote(new StickyNote("untitled","", color, font));
             sn.addNote(new StickyNote("bloop","hello", color, font));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralNotes.json");
             writer.open();

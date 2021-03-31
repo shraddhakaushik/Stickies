@@ -4,6 +4,7 @@ package model;
 import org.json.JSONObject;
 
 import java.awt.*;
+import java.util.Objects;
 
 
 // Represents a sticky note having a name and notes
@@ -26,6 +27,7 @@ public class StickyNote {
     public void assignName(String rename) {
         name = rename;
     }
+
 
     //MODIFIES: this
     //EFFECTS: attaches typed to notes

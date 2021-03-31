@@ -1,5 +1,6 @@
 package ui.options;
 
+import ui.NotesApp;
 import ui.StickyNoteApp;
 
 import javax.swing.*;

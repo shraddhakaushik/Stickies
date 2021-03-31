@@ -26,7 +26,6 @@ public class SavedNotesTest {
 
     @Test
     public void testAddNoteOne() {
-
         savedNotes.addNote(new StickyNote("untitled", "", Color.WHITE, font));
         assertEquals(1, savedNotes.getSavedNotes().size());
     }

@@ -67,14 +67,14 @@ public class StickyNoteApp {
         loadSavedNotes();
     }
 
-
     //MODIFIES: this, note
     //EFFECTS: adds the current note saved notes and menu, and saves to JSON file
-    public void saveAs(StickyNote note) {
+    public void saveAs(StickyNote note, NotesApp notesApp) {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
         saveSavedNotes();
-        addToMenu(note);
+        addToMenu(menu, note);
+        addToMenu(notesApp.getMenu(), note);
     }
 
 
@@ -86,16 +86,17 @@ public class StickyNoteApp {
     }
 
     //EFFECTS: adds given sticky note as a menu item to menu
-    public void addToMenu(StickyNote note) {
+    public void addToMenu(JMenu menu, StickyNote note) {
         SavedStickyNote savedStickyNote = new SavedStickyNote(note, menu, app);
     }
+
 
     //MODIFIES: this, note
     //EFFECTS: saves the current note temporarily, only to saved notes and menu
     public void saveNote(StickyNote note) {
         note.assignNotes(notes.getText());
         savedNotes.addNote(note);
-        addToMenu(note);
+        addToMenu(menu, note);
     }
 
     //MODIFIES: this
@@ -133,6 +134,10 @@ public class StickyNoteApp {
         }
     }
 
+    public JMenu returnMenu() {
+        return menu;
+    }
+
     //MODIFIES: this
     //EFFECTS: creates a new JFrame representing the given sticky note with the corresponding properties, adds each note
     //          from file to menu, and adds options to note
@@ -155,8 +160,12 @@ public class StickyNoteApp {
         notes.setBackground(color);
         frame.add(notes, BorderLayout.CENTER);
         createOptions(frame);
+        addSavedToMenu(menu);
+    }
+
+    public void addSavedToMenu(JMenu menu) {
         for (StickyNote stickyNote : savedNotes.getSavedNotes()) {
-            addToMenu(stickyNote);
+            addToMenu(menu, stickyNote);
         }
     }
 
@@ -195,27 +204,50 @@ public class StickyNoteApp {
         panel.setSize(0, 0);
         stickyFrame.add(panel, BorderLayout.NORTH);
 
-        ClearNote clrNote = new ClearNote(this, panel);
+        Options clrNote = new ClearNote(this, panel);
         options.add(clrNote);
 
-        EditNote editNote = new EditNote(this, panel);
+        Options editNote = new EditNote(this, panel);
         options.add(editNote);
 
-        NewNote newNote = new NewNote(this, panel, app);
+        Options newNote = new NewNote(this, panel, app);
         options.add(newNote);
 
         panel.add(menu);
 
-        SaveNote saveNote = new SaveNote(this, panel, sticky);
+        Options saveNote = new SaveNote(this, panel, sticky, app);
         options.add(saveNote);
 
 
     }
 
+    //EFFECTS: saves saved notes to file
+    public void saveSavedNotes() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(savedNotes);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: loads saved notes from file
+    public void loadSavedNotes() {
+        try {
+            savedNotes = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 
 
 
-    //EVERYTHING PAST THIS POINT BELONGS TO THE PREVIOUSLY IMPLEMENTED CONTROL LINE INTERFACE
+
+/*    //EVERYTHING PAST THIS POINT BELONGS TO THE PREVIOUSLY IMPLEMENTED CONTROL LINE INTERFACE
 
     //EFFECTS: Interacts with user and responds to given commands appropriately
     private void processTyped(StickyNote stick) {
@@ -325,10 +357,10 @@ public class StickyNoteApp {
             }
             if (found) {
                 sticky.assignName(op);
+                System.out.println("New note: " + sticky.getName());
+            } else {
+                System.out.println("New note: " + sticky.getName());
             }
-            System.out.println("New note: " + sticky.getName());
-        } else {
-            System.out.println("New note: " + sticky.getName());
         }
     }
 
@@ -352,33 +384,6 @@ public class StickyNoteApp {
         int pos = savedNotes.getSavedNotes().indexOf(sticky);
         savedNotes.getSavedNotes().set(pos, newNote);
         processTyped(newNote);
-    }
-
-
-    //EFFECTS: saves saved notes to file
-    private void saveSavedNotes() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(savedNotes);
-            jsonWriter.close();
-            System.out.println("Saved to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-    }
-
-    //MODIFIES: this
-    //EFFECTS: loads saved notes from file
-    private void loadSavedNotes() {
-        try {
-            savedNotes = jsonReader.read();
-            System.out.println("Loaded from " + JSON_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
-        }
-    }
-
-
-
+    }*/
 
 }

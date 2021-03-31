@@ -29,7 +29,7 @@ public class SavedNotes {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds a note to saved notes
+    //EFFECTS: adds a note to saved notes if saved notes doesn't already contain note. Else throws NoteExistsException
     public void addNote(StickyNote note) {
         savedNotes.add(note);
     }

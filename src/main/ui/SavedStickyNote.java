@@ -35,9 +35,10 @@ public class SavedStickyNote extends JMenuItem {
         this.addActionListener(new StickyClickHandler());
     }
 
+    @Override
     //EFFECTS: returns the sticky note represented in the saved sticky;
-    public StickyNote getSticky() {
-        return stickyNote;
+    public String getName() {
+        return stickyNote.getName();
     }
 
     //Represents an action listener for SavedStickyNote

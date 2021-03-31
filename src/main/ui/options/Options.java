@@ -1,5 +1,7 @@
 package ui.options;
 
+import model.StickyNote;
+import ui.NotesApp;
 import ui.StickyNoteApp;
 
 import javax.swing.*;
@@ -13,10 +15,11 @@ public abstract class Options {
     protected StickyNoteApp noteApp;
     protected JMenuBar parent;
 
+
     //MODIFIES: this
     //EFFECTS: constructor for Options
-    public Options(StickyNoteApp app, JMenuBar parent) {
-        noteApp = app;
+    public Options(StickyNoteApp noteApp, JMenuBar parent) {
+        this.noteApp = noteApp;
         this.parent = parent;
         createMenu(parent);
         parent.add(menu);

@@ -1,6 +1,7 @@
 package ui.options;
 
 import model.StickyNote;
+import ui.NotesApp;
 import ui.StickyNoteApp;
 
 import javax.swing.*;
@@ -12,13 +13,14 @@ public class SaveNote extends Options {
     private StickyNote stickyNote;
     private JMenuItem save;
     private JMenuItem saveAs;
+    private NotesApp notesApp;
 
     //MODIFIES: this
     //EFFECTS: constructor for SaveNote
-    public SaveNote(StickyNoteApp noteApp, JMenuBar parent, StickyNote stickyNote) {
+    public SaveNote(StickyNoteApp noteApp, JMenuBar parent, StickyNote stickyNote, NotesApp notesApp) {
         super(noteApp, parent);
         this.stickyNote = stickyNote;
-
+        this.notesApp = notesApp;
     }
 
     //MODIFIES: this
@@ -60,7 +62,7 @@ public class SaveNote extends Options {
         //MODIFIES: this
         //EFFECTS: saves sticky note to JSON file
         public void actionPerformed(ActionEvent e) {
-            noteApp.saveAs(stickyNote);
+            noteApp.saveAs(stickyNote, notesApp);
         }
     }
 
