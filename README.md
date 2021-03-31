@@ -36,6 +36,7 @@ as well as to other students and professionals working centrally with their comp
 - As a user, I want to be able to change the size of my font
 - As a user, I want to be able to italicize or bold my sticky note
 - As a user, I want to be able to save a note temporarily 
+- As a user, I want my main saved menu to update alongside the individual note's saved menu
 
 *GOALS*:
 - As a user, I want to be able to create my own typing shortcuts
@@ -44,3 +45,22 @@ as well as to other students and professionals working centrally with their comp
 - As a user, I want to be able to input images onto my sticky note
 
 
+*Phase 4: Task 2*:
+
+For phase 4, I implemented a bi-directional association between StickyNoteApp and NotesApp. NotesApp 
+refers to StickyNoteApp to get the saved menu that lives within StickyNoteApp, as well as to load saved notes 
+from a file and set as a parent every time a NewNote object is created. StickyNoteApp knows of NotesApp to be able 
+to update the menu in NotesApp every time the menu in StickyNoteApp is updated, as well as to feed the NotesApp object 
+as a parameter for some of StickyNoteApp's other associated classes.
+
+*Phase 4: Task 3*:
+- The current design involves a lot of coupling between classes which, ideally, I would be able to spend quite a bit of 
+  refactoring and fixing. There is especially quite a bit of intricate coupling in the UI class from before I learnt it 
+  was an issue. 
+- The EditNote class is not very cohesive, as it has font editing, colour editing, and renaming all in one class with 
+  multiple action listener classes within. With more time, I would extract separate classes for font and colour editing.
+- Some subtypes of the Options abstract class violate Liskov's substitution principle in terms of taken
+  parameters, so I would introduce the extra parameters to the Options class so that none of the subclasses would be
+  adding any extra params, and the classes that don't require the params to do anything special won't have to change
+  much about their implementations either
+  

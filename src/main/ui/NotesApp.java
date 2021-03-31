@@ -11,12 +11,6 @@ public class NotesApp extends JFrame {
     private StickyNoteApp stickyApp;
     private JMenu menu = new JMenu();
 
-    public JMenu getMenu() {
-        return menu;
-    }
-
-
-
     //EFFECTS: constructor for notes app
     public NotesApp() {
         super("Stickies");
@@ -26,6 +20,11 @@ public class NotesApp extends JFrame {
         setVisible(true);
         setSize(300, 300);
         setupMainMenu();
+    }
+
+    //EFFECTS: returns menu
+    public JMenu getMenu() {
+        return menu;
     }
 
     //EFFECTS: sets up the starting menu

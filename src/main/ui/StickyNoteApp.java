@@ -55,7 +55,7 @@ public class StickyNoteApp {
     //MODIFIES: this
     //EFFECTS: initializes all trivial fields and loads notes from saved JSON file
     public void initializeNoteApp() {
-        menu = new JMenu("Menu");
+        menu = new JMenu("Saved");
         options = new ArrayList<>();
         font = new Font(Font.SANS_SERIF, Font.ITALIC, 12);
         noteNotes = "";
@@ -134,6 +134,7 @@ public class StickyNoteApp {
         }
     }
 
+    //EFFECTS: returns menu
     public JMenu returnMenu() {
         return menu;
     }
@@ -163,6 +164,7 @@ public class StickyNoteApp {
         addSavedToMenu(menu);
     }
 
+    //EFFECTS: adds each sticky note from saved notes to given menu
     public void addSavedToMenu(JMenu menu) {
         for (StickyNote stickyNote : savedNotes.getSavedNotes()) {
             addToMenu(menu, stickyNote);
@@ -248,6 +250,8 @@ public class StickyNoteApp {
 
 
 /*    //EVERYTHING PAST THIS POINT BELONGS TO THE PREVIOUSLY IMPLEMENTED CONTROL LINE INTERFACE
+        I AM KEEPING THE CODE FOR MY OWN PERSONAL RECORD BUT COMMENTING IT OUT SO AS NOT TO INTERFERE WITH MY
+        CURRENTLY FUNCTIONAL GUI PROGRAM
 
     //EFFECTS: Interacts with user and responds to given commands appropriately
     private void processTyped(StickyNote stick) {

@@ -82,6 +82,8 @@ public class EditNote extends Options {
         fontSize.addActionListener(new FontSizeClickHandler());
     }
 
+    //TODO citation: information and understanding of JColorChooser through
+    //TODO   https://docs.oracle.com/javase/tutorial/uiswing/components/colorchooser.html
     //Represents an action listener for recolour
     private class RecolourClickHandler implements ActionListener {
 
