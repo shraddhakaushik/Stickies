@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StickyNoteApp {
     private static final String JSON_STORE = "./data/savedNotes.json";
     private StickyNote sticky;
-    private Scanner typed;
+    //private Scanner typed;
     private SavedNotes savedNotes = new SavedNotes("NoteRoom");
     private String op = "";
     private JsonWriter jsonWriter;

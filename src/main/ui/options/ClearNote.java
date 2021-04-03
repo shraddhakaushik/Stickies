@@ -1,8 +1,7 @@
 package ui.options;
 
-import ui.NotesApp;
-import ui.StickyNoteApp;
 
+import ui.StickyNoteApp;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
