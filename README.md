@@ -63,4 +63,5 @@ as a parameter for some of StickyNoteApp's other associated classes.
   parameters, so I would introduce the extra parameters to the Options class so that none of the subclasses would be
   adding any extra params, and the classes that don't require the params to do anything special won't have to change
   much about their implementations either
+- I would refactor the menu used in sticky notes app and notes app to be a class of its own that extends JMenu
   

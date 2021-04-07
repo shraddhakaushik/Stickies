@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Represents a sticky note in a Sticky Notes application
 //TODO citation: code partially taken and modified from WorkRoomApp.java in JsonSerializationDemo

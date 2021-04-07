@@ -1,0 +1,75 @@
+{
+    "notes": [
+        {
+            "red": 204,
+            "notes": "\n\nf;sfldsfjkldsfklds\n\n",
+            "green": 204,
+            "fontFamily": "SansSerif",
+            "blue": 255,
+            "name": "purp note",
+            "fontSize": 12,
+            "fontStyle": 2
+        },
+        {
+            "red": 255,
+            "notes": "\ndkjldlsjkdjaslk",
+            "green": 153,
+            "fontFamily": "SansSerif",
+            "blue": 153,
+            "name": "pink note",
+            "fontSize": 12,
+            "fontStyle": 2
+        },
+        {
+            "red": 255,
+            "notes": "\nhjkhjkhkjhj\nkjlljkljlkjkljkjl",
+            "green": 204,
+            "fontFamily": "SansSerif",
+            "blue": 204,
+            "name": "new note",
+            "fontSize": 12,
+            "fontStyle": 2
+        },
+        {
+            "red": 255,
+            "notes": "\nhello \nremember to take out the trash",
+            "green": 231,
+            "fontFamily": "SansSerif",
+            "blue": 231,
+            "name": "Reminder",
+            "fontSize": 12,
+            "fontStyle": 0
+        },
+        {
+            "red": 234,
+            "notes": "\nMary had a little lamb\nlittle lamb\nlittle lamb\nMary had a little lamb\nwhose fleece was white as snow",
+            "green": 249,
+            "fontFamily": "Serif",
+            "blue": 255,
+            "name": "Mary",
+            "fontSize": 15,
+            "fontStyle": 0
+        },
+        {
+            "red": 255,
+            "notes": "\ndslfdjfdlf\nljfdjlfjdsl\ndljfljsd",
+            "green": 255,
+            "fontFamily": "SansSerif",
+            "blue": 255,
+            "name": "untitled",
+            "fontSize": 12,
+            "fontStyle": 2
+        },
+        {
+            "red": 255,
+            "notes": "\nkfjlsljdfkdslj\ndjflksdfkjlds\nsdlkfjdslk",
+            "green": 255,
+            "fontFamily": "SansSerif",
+            "blue": 255,
+            "name": "new",
+            "fontSize": 12,
+            "fontStyle": 2
+        }
+    ],
+    "name": "NoteRoom"
+}

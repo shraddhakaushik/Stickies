@@ -1,0 +1,25 @@
+{
+    "notes": [
+        {
+            "red": 255,
+            "notes": "",
+            "green": 255,
+            "fontFamily": "Monospaced",
+            "blue": 255,
+            "name": "untitled",
+            "fontSize": 12,
+            "fontStyle": 0
+        },
+        {
+            "red": 255,
+            "notes": "hello",
+            "green": 255,
+            "fontFamily": "Monospaced",
+            "blue": 255,
+            "name": "bloop",
+            "fontSize": 12,
+            "fontStyle": 0
+        }
+    ],
+    "name": "My notes"
+}
