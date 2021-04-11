@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 //Represents a "New" menu to create a new note
+//
 public class NewNote extends Options {
 
     private JMenuItem makeNote;
