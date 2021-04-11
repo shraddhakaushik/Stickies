@@ -1,9 +1,7 @@
-# CPSC210 Personal Project
+# Stickies
 
 ## Sticky Notes Application
 
-The concept that I am choosing to pursue for my *CPSC 210* personal project is that of a **sticky
-note software** with numerous useful features that give the user control over their virtual sticky notes.
 As a student, my laptop's inbuilt Stickies application is one that I use for nearly everything; whether it is to 
 note down reminders, a to-do list, note down my thoughts, or work out my day's schedule, the app is always so 
 convenient.
