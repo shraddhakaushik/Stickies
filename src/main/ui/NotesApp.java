@@ -36,7 +36,6 @@ public class NotesApp extends JFrame {
         stickyApp.addSavedToMenu(menu);
         panel.add(menu);
         panel.setLayout(new GridBagLayout());
-        panel.setForeground(new Color(82, 28, 42));
         add(panel, BorderLayout.CENTER);
     }
 

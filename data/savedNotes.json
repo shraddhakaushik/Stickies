@@ -12,16 +12,6 @@
         },
         {
             "red": 255,
-            "notes": "\ndkjldlsjkdjaslk",
-            "green": 153,
-            "fontFamily": "SansSerif",
-            "blue": 153,
-            "name": "pink note",
-            "fontSize": 12,
-            "fontStyle": 2
-        },
-        {
-            "red": 255,
             "notes": "\nhjkhjkhkjhj\nkjlljkljlkjkljkjl",
             "green": 204,
             "fontFamily": "SansSerif",
@@ -51,24 +41,14 @@
             "fontStyle": 0
         },
         {
-            "red": 255,
-            "notes": "\ndslfdjfdlf\nljfdjlfjdsl\ndljfljsd",
-            "green": 255,
-            "fontFamily": "SansSerif",
+            "red": 204,
+            "notes": "\n\nhello world",
+            "green": 204,
+            "fontFamily": "Monospaced",
             "blue": 255,
-            "name": "untitled",
-            "fontSize": 12,
-            "fontStyle": 2
-        },
-        {
-            "red": 255,
-            "notes": "\nkfjlsljdfkdslj\ndjflksdfkjlds\nsdlkfjdslk",
-            "green": 255,
-            "fontFamily": "SansSerif",
-            "blue": 255,
-            "name": "new",
-            "fontSize": 12,
-            "fontStyle": 2
+            "name": "demo",
+            "fontSize": 20,
+            "fontStyle": 0
         }
     ],
     "name": "NoteRoom"
